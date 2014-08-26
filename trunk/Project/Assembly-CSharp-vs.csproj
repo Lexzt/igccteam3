@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\_Assets\_Scripts\PieController.cs" />
+     <Compile Include="Assets\_Assets\_Scripts\Pointer.cs" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>C:/Users/user/Desktop/IGCC Team 3/Project/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>

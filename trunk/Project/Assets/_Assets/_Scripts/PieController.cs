@@ -32,6 +32,12 @@ public class PieController : MonoBehaviour
 
     public GameObject PrefabObject;
 
+    // Value of One slide
+    private int ValueOfSlice = 2;
+
+    // Pie Object
+    private GameObject ParentObj;
+
 	void Start () 
     {
         // Randoming Colors
@@ -53,7 +59,7 @@ public class PieController : MonoBehaviour
             int Value;
             if (i + 1 != m_iAmtOfPies)
             {
-                Value = Random.Range(0, m_iMaxAmtOfPie - m_iCurrentAmtOfPie);
+                Value = Random.Range(ValueOfSlice, m_iMaxAmtOfPie - m_iCurrentAmtOfPie);
 
                 // If Number is odd
                 if (Value % 2 == 1)
@@ -72,54 +78,39 @@ public class PieController : MonoBehaviour
             ListOfColor.Remove(ListOfColor[RandomColorNo]);
         }
 
-        GameObject ParentObj = new GameObject("Parent");
+        ParentObj = new GameObject("Parent");
 
-        for (int i = 0; i < 360 / 2; i++)
+        for (int i = 0; i < 360 / ValueOfSlice; i++)
         {
-            //Quaternion Angle = new Quaternion(0,0,Mathf.Deg2Rad * i * 2,0);
             GameObject Inst = Instantiate(PrefabObject, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-            Inst.transform.Rotate(new Vector3(0, 0, (int)(i * 2)));
+            Inst.transform.Rotate(new Vector3(0, 0, (int)(i * ValueOfSlice)));
             Inst.transform.parent = ParentObj.transform;
 
-            Inst.renderer.material.color = GetColor((int)(i * 2), ListOfPieShapes);
+            Inst.renderer.material.color = GetColor((int)(i * ValueOfSlice), ListOfPieShapes);
         }
 	}
 
     Color GetColor(int iAmt, List<Pie> ListOfPie)
     {
-        ////int BeforeValues = 0;
-        //foreach (Pie tPie in ListOfPie)
-        //{
-        //    if (iAmt < tPie.m_iValue)
-        //    {
-        //        return tPie.m_cColor;
-        //    }
-        //    //BeforeValues += tPie.m_iValue;
-        //}
+        for (int i = 0; i < ListOfPie.Count; i++)
+        {
+            int iBeforeHand = 0;
+            for (int j = 0; j <= i; j++)
+            {
+                iBeforeHand += ListOfPie[j].m_iValue;
+            }
 
-        //for (int i = 0; i < ListOfPie.Count; i++)
-        //{
-        //    int iBeforeHand = 0;
-        //    for (int j = 0; j < i; j++)
-        //    {
-        //        iBeforeHand += ListOfPie[j].m_iValue;
-        //    }
-
-        //    Debug.Log(iBeforeHand);
-
-        //    if (iAmt < iBeforeHand)
-        //    {
-        //        return ListOfPie[i].m_cColor;
-        //    }
-        //}
-
-
+            if (iAmt < iBeforeHand)
+            {
+                return ListOfPie[i].m_cColor;
+            }
+        }
 
         return Color.white;
     }
 
     void Update() 
     {
-	
+        ParentObj.transform.Rotate(Vector3.back, 30 * 2 * Time.deltaTime);
 	}
 }
