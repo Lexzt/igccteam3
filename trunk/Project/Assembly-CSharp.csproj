@@ -46,8 +46,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\_Assets\_Scripts\HelperScript.cs" />
      <Compile Include="Assets\_Assets\_Scripts\PieController.cs" />
+     <Compile Include="Assets\_Assets\_Scripts\PieScript.cs" />
      <Compile Include="Assets\_Assets\_Scripts\Pointer.cs" />
+     <Compile Include="Assets\_Assets\_Scripts\SwipeManager.cs" />
+     <Compile Include="Assets\_Assets\_Scripts\TakumiTestScript\TestRotate.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">

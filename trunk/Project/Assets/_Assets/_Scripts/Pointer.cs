@@ -13,40 +13,28 @@ public class Pointer : MonoBehaviour {
 	void Update () 
     {
         RaycastHit hit;
-        if (Physics.Raycast(PointerPosition.position, Vector3.forward, out hit, Mathf.Infinity))
+        if (Input.GetMouseButtonDown(0))
         {
-//            if (hit.transform.renderer.material.color == Color.red)
-//            {
-//                Debug.Log("Red");
-//            }
-//            else if (hit.transform.renderer.material.color == Color.blue)
-//            {
-//                Debug.Log("Blue");
-//            }
-//            else if (hit.transform.renderer.material.color == Color.black)
-//            {
-//                Debug.Log("Black");
-//            }
-//            else if (hit.transform.renderer.material.color == Color.cyan)
-//            {
-//                Debug.Log("Cyan");
-//            }
-//            else if (hit.transform.renderer.material.color == Color.gray)
-//            {
-//                Debug.Log("Gray");
-//            }
-//            else if (hit.transform.renderer.material.color == Color.green)
-//            {
-//                Debug.Log("Green");
-//            }
-//            else if (hit.transform.renderer.material.color == Color.magenta)
-//            {
-//                Debug.Log("Magenta");
-//            }
-//            else if (hit.transform.renderer.material.color == Color.yellow)
-//            {
-//                Debug.Log("Yellow");
-//            }
+            if (Physics.Raycast(PointerPosition.position, Vector3.forward, out hit, Mathf.Infinity))
+            {
+                //Debug.Log(hit.transform.renderer.material.name);
+                if (hit.transform.tag == "Pie")
+                {
+                    Debug.Log(hit.transform.GetComponent<PieScript>().m_ePieType);
+                }
+                //if (hit.transform.renderer.material.color == Color.red)
+                //{
+                //    Debug.Log("Red");
+                //}
+                //else if (hit.transform.renderer.material.color == Color.blue)
+                //{
+                //    Debug.Log("Blue");
+                //}
+                //else if (hit.transform.renderer.material.color == Color.green)
+                //{
+                //    Debug.Log("green");
+                //}
+            }
         }
 	}
 }
