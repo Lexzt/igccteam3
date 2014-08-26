@@ -20,7 +20,8 @@ public class PieController : MonoBehaviour
 {
     // Main Amt of Pie shapes
     public List<Pie> ListOfPieShapes;
-
+	// Speed Limit of Rotation
+	public float	 rotSpeedLimit = 50;
     // Current Amt of Pie values
     private int m_iCurrentAmtOfPie  = 0;
     private int m_iMaxAmtOfPie      = 360;
@@ -124,6 +125,14 @@ public class PieController : MonoBehaviour
 	public void IncreaseSpeed (float speed, bool dirRight = true)
 	{
 		rotSpeed += speed;
+		float dir = (rotSpeed >= 0) ? 1 : -1;
+
+		if(Mathf.Abs(rotSpeed) > rotSpeedLimit)
+		{
+			rotSpeed = rotSpeedLimit;
+			rotSpeed *= dir;
+		}
+
 	}
 	public void StopRotate()
 	{

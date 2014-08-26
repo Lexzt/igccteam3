@@ -322,7 +322,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ListOfPieShapes: []
+  rotSpeedLimit: 50
   PrefabObject: {fileID: 100000, guid: ea6e6113df4f6c3468a61bf11123c6b0, type: 2}
+  rotSpeed: 0
 --- !u!4 &1454669399
 Transform:
   m_ObjectHideFlags: 0
@@ -346,10 +348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf2cf22443c4f47e7b45cd0af13cbcc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotSpeed: .00999999978
   inputPosition: {x: 0, y: 0}
   inputPositionBuffer: {x: 0, y: 0}
-  flickDistance: 0
 --- !u!1 &1485439109
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,10 +5,9 @@ public class SwipeManager : MonoBehaviour
 {
 
 	/// 変数定義
-	public float rotSpeed = 0.01f;
-	public Vector2 inputPosition;
-	public Vector2 inputPositionBuffer;
-	public float flickDistance = 0.0f;
+	public Vector2 	inputPosition;
+	public Vector2 	inputPositionBuffer;
+
 
 	private PieController pCtrler;
 	private bool isClick = false;
@@ -20,6 +19,8 @@ public class SwipeManager : MonoBehaviour
 	}
 	// Update is called once per frame
 	void Update () {
+//=========================
+//TODO: DELETE AFTER ATTACH COLLIDER
 		if(Input.GetMouseButtonDown(0))
 		{
 			onClickObject();
@@ -29,7 +30,18 @@ public class SwipeManager : MonoBehaviour
 			onClickEnd();
 		}
 	}
-	
+//=========================
+
+	void OnMouseDown()
+	{
+		onClickObject();
+	}
+	void OnMouseUp()
+	{
+		onClickEnd();
+	}
+
+
 	private void onClickObject(){
 		GameObject selectGameObject;// クリックされたゲームオブジェクトへの参照.
 
@@ -47,7 +59,7 @@ public class SwipeManager : MonoBehaviour
 			//クリックした際のポジションを取得
 			inputPosition = selectGameObject.transform.position;
 			inputPositionBuffer = Input.mousePosition;
-			objectPos = Camera.main.WorldToScreenPoint(selectGameObject.transform.position);
+			objectPos = Camera.main.WorldToScreenPoint(pCtrler.gameObject.transform.position);
 		}
 		else{
 			selectGameObject = null;// 何もクリックされていない場合はnullを代入
@@ -65,21 +77,24 @@ public class SwipeManager : MonoBehaviour
 		inputPosition = inputPositionBuffer;
 		inputPositionBuffer = Input.mousePosition;
 		// 2つのベクトルの角度を比較して右回転か左回転かを判断する
-		float angle1 = Mathf.Atan2(inputPositionBuffer.x-objectPos.x,inputPositionBuffer.y-objectPos.y);
-		float angle2 = Mathf.Atan2(inputPosition.x-objectPos.x,inputPosition.y-objectPos.y);
+		float angle1 = Mathf.Atan2(inputPositionBuffer.x-objectPos.x, inputPositionBuffer.y	-objectPos.y);
+		float angle2 = Mathf.Atan2(inputPosition.x		-objectPos.x, inputPosition.y		-objectPos.y);
 		float subAngle = angle1 - angle2;// プラスなら右回転
 		float rotScale = 0;
 		rotScale = Vector2.Angle(inputPositionBuffer-objectPos, inputPosition-objectPos);
 		if(subAngle < 0){
 			rotScale *= -1.0f;
 		}
-		// その分だけ回転速度をアップする
+		print (angle1);
+		print (angle2);
+		print (objectPos);
+
 		print (rotScale);
 		if(Mathf.Abs(rotScale) < 0.03f)
 		{
 			pCtrler.StopRotate();
 		}else{
-			rotScale *= 0.01f;
+			rotScale *= 0.05f;
 			pCtrler.IncreaseSpeed (rotScale);
 		}
 		isClick = false;
