@@ -302,6 +302,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1454669399}
   - 114: {fileID: 1454669398}
+  - 114: {fileID: 1454669400}
   m_Layer: 0
   m_Name: Pie Controller
   m_TagString: Untagged
@@ -334,6 +335,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!114 &1454669400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1454669397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf2cf22443c4f47e7b45cd0af13cbcc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotSpeed: .00999999978
+  inputPosition: {x: 0, y: 0}
+  inputPositionBuffer: {x: 0, y: 0}
+  flickDistance: 0
 --- !u!1 &1485439109
 GameObject:
   m_ObjectHideFlags: 0
