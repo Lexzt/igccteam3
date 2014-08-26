@@ -46,7 +46,7 @@ public class PieController : MonoBehaviour
         ListOfColor.Add(Color.yellow);
 
         // Randoming amt of "Pies"
-        m_iAmtOfPies = Random.Range(2, 5);
+        m_iAmtOfPies = Random.Range(3, 5);
 
         for (int i = 0; i < m_iAmtOfPies; i++)
         {
@@ -60,7 +60,6 @@ public class PieController : MonoBehaviour
                 {
                     Value -= 1;
                 }
-
                 m_iCurrentAmtOfPie += Value;
             }
             else
@@ -75,22 +74,49 @@ public class PieController : MonoBehaviour
 
         GameObject ParentObj = new GameObject("Parent");
 
-        for (int i = 0; i < 180; i++)
+        for (int i = 0; i < 360 / 2; i++)
         {
             //Quaternion Angle = new Quaternion(0,0,Mathf.Deg2Rad * i * 2,0);
             GameObject Inst = Instantiate(PrefabObject, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-            Inst.transform.Rotate(new Vector3(0, 0, i * 2));
+            Inst.transform.Rotate(new Vector3(0, 0, (int)(i * 2)));
             Inst.transform.parent = ParentObj.transform;
-        }
 
-        foreach (Pie tPie in ListOfPieShapes)
-        {
-            for (int i = 0; i < tPie.m_iValue; i += 2)
-            {
-
-            }
+            Inst.renderer.material.color = GetColor((int)(i * 2), ListOfPieShapes);
         }
 	}
+
+    Color GetColor(int iAmt, List<Pie> ListOfPie)
+    {
+        ////int BeforeValues = 0;
+        //foreach (Pie tPie in ListOfPie)
+        //{
+        //    if (iAmt < tPie.m_iValue)
+        //    {
+        //        return tPie.m_cColor;
+        //    }
+        //    //BeforeValues += tPie.m_iValue;
+        //}
+
+        //for (int i = 0; i < ListOfPie.Count; i++)
+        //{
+        //    int iBeforeHand = 0;
+        //    for (int j = 0; j < i; j++)
+        //    {
+        //        iBeforeHand += ListOfPie[j].m_iValue;
+        //    }
+
+        //    Debug.Log(iBeforeHand);
+
+        //    if (iAmt < iBeforeHand)
+        //    {
+        //        return ListOfPie[i].m_cColor;
+        //    }
+        //}
+
+
+
+        return Color.white;
+    }
 
     void Update() 
     {
