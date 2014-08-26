@@ -15,6 +15,7 @@ public class Pie
     }
 }
 
+
 public class PieController : MonoBehaviour 
 {
     // Main Amt of Pie shapes
@@ -37,6 +38,8 @@ public class PieController : MonoBehaviour
 
     // Pie Object
     private GameObject ParentObj;
+	
+	private float rotSpeed = 0;	// rotation speed
 
 	void Start () 
     {
@@ -111,6 +114,21 @@ public class PieController : MonoBehaviour
 
     void Update() 
     {
-        ParentObj.transform.Rotate(Vector3.back, 30 * 2 * Time.deltaTime);
+		ParentObj.transform.Rotate(Vector3.back, rotSpeed);
 	}
+
+//==============================
+	/// <summary>
+	/// Control Speed Functions.
+	/// </summary>
+	public void IncreaseSpeed (float speed, bool dirRight = true)
+	{
+		rotSpeed += speed;
+	}
+	public void StopRotate()
+	{
+		rotSpeed = 0;
+	}
+//==============================
+
 }
