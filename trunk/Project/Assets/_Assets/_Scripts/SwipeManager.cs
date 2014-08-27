@@ -8,13 +8,12 @@ public class SwipeManager : MonoBehaviour
 
 	public float 		accelSpeedValue = 10.0f;
 	public float		tapRangeDetection = 0.03f;
-
 	private Vector2 	inputPosition;
 	private Vector2 	inputPositionBuffer;
 	private PieController pCtrler;
-	private bool 	isClick = false;
-	private Vector2 objectPos;
-
+	private bool 		isClick = false;
+	private Vector2 	objectPos;
+	private GameObject 	selectGameObject;// クリックされたゲームオブジェクトへの参照.
 	void Start()
 	{
 		isClick = false;
@@ -45,7 +44,6 @@ public class SwipeManager : MonoBehaviour
 
 
 	private void onClickObject(){
-		GameObject selectGameObject;// クリックされたゲームオブジェクトへの参照.
 
 		// レイを取得.
 		Ray clkRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -92,11 +90,14 @@ public class SwipeManager : MonoBehaviour
 		if(Mathf.Abs(rotScale) < tapRangeDetection)
 		{
 			pCtrler.StopRotate();
-		}else{
-			print (subVec);
-			if( subVec.y > 0)
-			{
-				pCtrler.IncreaseSpeed (accelSpeedValue);
+		}else{// if Swipe
+			print (inputPosition);
+			if(Screen.width/2 > inputPosition.x){
+				// Swipe Up
+				if( subVec.y > 0)	pCtrler.IncreaseSpeed (accelSpeedValue);
+			}else{
+				// Swipe Down
+				if( subVec.y > 0)	pCtrler.IncreaseSpeed (-accelSpeedValue);
 			}
 		}
 		isClick = false;

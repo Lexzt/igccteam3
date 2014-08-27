@@ -108,7 +108,9 @@ public class PieController : MonoBehaviour
 		ParentObj.transform.Rotate(Vector3.back, rotSpeed);
 		// decrease Speed over time
 		rotSpeed *= rotDecleaseRait;
-
+		if (Mathf.Abs(rotSpeed) < 0.001f) {
+			rotSpeed = 0;
+		}
         //ParentObj.transform.Rotate(Vector3.back, 30 * 5 * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.B))
