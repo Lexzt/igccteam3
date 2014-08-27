@@ -94,7 +94,8 @@ public class SwipeManager : MonoBehaviour
 		{
 			pCtrler.StopRotate();
 		}else{
-			rotScale *= 0.05f;
+            rotScale *= 0.05f;
+            //rotScale *= Time.deltaTime;
 			pCtrler.IncreaseSpeed (rotScale);
 		}
 		isClick = false;
