@@ -24,7 +24,8 @@ public class PieController : MonoBehaviour
     public List<Material> ListOfMaterial;
 
 	// Speed Limit of Rotation
-	public float	 rotSpeedLimit = 50;
+	public float	rotSpeedLimit = 50;
+	public float	rotDecleaseRait = 0.99f;	// set 0 ~ 1
     // Current Amt of Pie values
     private float m_fCurrentAmtOfPie    = 0;
     private int m_iMaxAmtOfPie          = 360;
@@ -49,42 +50,39 @@ public class PieController : MonoBehaviour
 
 	void Start () 
     {
-        for (int i = 0; i < m_iAmtOfPies; i++)
-        {
-            float Value;
-            if (i + 1 != m_iAmtOfPies)
-            {
-                //Value = Random.Range(ValueOfSlice, m_iMaxAmtOfPie - m_iCurrentAmtOfPie);
-                Value = (ListOfStartingPercentages[i] / 100.0f) * m_iMaxAmtOfPie;
+				for (int i = 0; i < m_iAmtOfPies; i++) {
+						float Value;
+						if (i + 1 != m_iAmtOfPies) {
+								//Value = Random.Range(ValueOfSlice, m_iMaxAmtOfPie - m_iCurrentAmtOfPie);
+								Value = (ListOfStartingPercentages [i] / 100.0f) * m_iMaxAmtOfPie;
 
-                // If Number is odd
-                if (Value % 2 == 1)
-                {
-                    Value -= 1;
-                }
-                m_fCurrentAmtOfPie += Value;
-            }
-            else
-            {
-                Value = m_iMaxAmtOfPie - m_fCurrentAmtOfPie;
-            }
+								// If Number is odd
+								if (Value % 2 == 1) {
+										Value -= 1;
+								}
+								m_fCurrentAmtOfPie += Value;
+						} else {
+								Value = m_iMaxAmtOfPie - m_fCurrentAmtOfPie;
+						}
 
-            ListOfPieShapes.Add(new Pie((int)Value, ListOfMaterial[i]));
-        }
+						ListOfPieShapes.Add (new Pie ((int)Value, ListOfMaterial [i]));
+				}
 
-        ParentObj = new GameObject("Parent");
+				ParentObj = new GameObject ("Parent");
 
-        for (int i = 0; i < 360 / ValueOfSlice; i++)
-        {
-            GameObject Inst = Instantiate(PrefabObject, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-            Inst.transform.Rotate(new Vector3(0, 0, (int)(i * ValueOfSlice)));
-            Inst.transform.parent = ParentObj.transform;
+				for (int i = 0; i < 360 / ValueOfSlice; i++) {
+						GameObject Inst = Instantiate (PrefabObject, new Vector3 (0, 0, 0), Quaternion.identity) as GameObject;
+						Inst.transform.Rotate (new Vector3 (0, 0, (int)(i * ValueOfSlice)));
+						Inst.transform.parent = ParentObj.transform;
 
-            Inst.renderer.material = GetMaterial((int)(i * ValueOfSlice), ListOfPieShapes);
+						Inst.renderer.material = GetMaterial ((int)(i * ValueOfSlice), ListOfPieShapes);
 
-            PieScript ScriptInst = Inst.AddComponent<PieScript>();
-            ScriptInst.m_ePieType = HelperScript.GetTileType(Inst.renderer.material.name);
-        }
+						PieScript ScriptInst = Inst.AddComponent<PieScript> ();
+						ScriptInst.m_ePieType = HelperScript.GetTileType (Inst.renderer.material.name);
+				}
+
+				/// StartGame;
+		StartRoulette (10);
 	}
 
     Material GetMaterial(int iAmt, List<Pie> ListOfPie)
@@ -107,7 +105,10 @@ public class PieController : MonoBehaviour
 
     void Update() 
     {
-		//ParentObj.transform.Rotate(Vector3.back, rotSpeed);
+		ParentObj.transform.Rotate(Vector3.back, rotSpeed);
+		// decrease Speed over time
+		rotSpeed *= rotDecleaseRait;
+
         //ParentObj.transform.Rotate(Vector3.back, 30 * 5 * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.B))
@@ -235,6 +236,12 @@ public class PieController : MonoBehaviour
 		rotSpeed = 0;
 
         ResetPerc();
+	}
+
+	/// call On GameStart.
+	public void StartRoulette(float startSpeed)
+	{
+		rotSpeed = startSpeed;
 	}
 //==============================
 
