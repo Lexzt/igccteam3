@@ -6,8 +6,9 @@ public class SwipeManager : MonoBehaviour
 
 	/// 変数定義
 
-	public float 		accelSpeedRait = 1.0f;
+	public float 		accelSpeedValue = 10.0f;
 	public float		tapRangeDetection = 0.03f;
+
 	private Vector2 	inputPosition;
 	private Vector2 	inputPositionBuffer;
 	private PieController pCtrler;
@@ -80,19 +81,23 @@ public class SwipeManager : MonoBehaviour
 		float angle1 = Mathf.Atan2(inputPositionBuffer.x-objectPos.x, inputPositionBuffer.y	-objectPos.y);
 		float angle2 = Mathf.Atan2(inputPosition.x		-objectPos.x, inputPosition.y		-objectPos.y);
 		float subAngle = angle1 - angle2;// プラスなら右回転
-		float rotScale = 0;
+		float rotScale = 0;	// value of Swipe
 		rotScale = Vector2.Angle(inputPositionBuffer-objectPos, inputPosition-objectPos);
 		if(subAngle < 0){
 			rotScale *= -1.0f;
 		}
+		//Calc Swipe
+		Vector3 subVec =  inputPositionBuffer - inputPosition;
 
 		if(Mathf.Abs(rotScale) < tapRangeDetection)
 		{
 			pCtrler.StopRotate();
 		}else{
-			rotScale *= 0.05f * accelSpeedRait;
-			//rotScale *= Time.deltaTime;
-			pCtrler.IncreaseSpeed (rotScale);
+			print (subVec);
+			if( subVec.y > 0)
+			{
+				pCtrler.IncreaseSpeed (accelSpeedValue);
+			}
 		}
 		isClick = false;
 	}
