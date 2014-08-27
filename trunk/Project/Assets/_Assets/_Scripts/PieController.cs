@@ -44,6 +44,9 @@ public class PieController : MonoBehaviour
 	
 	private float rotSpeed = 0;	// rotation speed
 
+    // Debug - How Many times spinned
+    public int m_iSpinNo = 0;
+
 	void Start () 
     {
         for (int i = 0; i < m_iAmtOfPies; i++)
@@ -104,20 +107,42 @@ public class PieController : MonoBehaviour
 
     void Update() 
     {
-		ParentObj.transform.Rotate(Vector3.back, rotSpeed);
+		//ParentObj.transform.Rotate(Vector3.back, rotSpeed);
         //ParentObj.transform.Rotate(Vector3.back, 30 * 5 * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.B))
         {
-            AddValue(ListOfPieShapes[0].m_Material, 4);     // Miss Attack
-            SubValue(ListOfPieShapes[1].m_Material, 6);     // Normal Attack
-            AddValue(ListOfPieShapes[2].m_Material, 2);     // Critical Attack
+            float FailPercentage = (4.0f / 100.0f) * 360.0f;
+            float AtkPercentage = (6.0f / 100.0f) * 360.0f;
+            float CritAtkPercentage = (2.0f / 100.0f) * 360.0f;
+
+            // Odd No
+            if ((int)FailPercentage % 2 == 1)
+            {
+                FailPercentage -= 1;
+            }
+
+            if ((int)AtkPercentage % 2 == 1)
+            {
+                AtkPercentage -= 1;
+            }
+
+            if ((int)CritAtkPercentage % 2 == 1)
+            {
+                CritAtkPercentage -= 1;
+            }
+
+            //float FailPercentage = 4.0f;
+            //float AtkPercentage = 6.0f;
+            //float CritAtkPercentage = 2.0f;
+
+            AddValue(ListOfPieShapes[0].m_Material, (int)(FailPercentage));     // Miss Attack
+            SubValue(ListOfPieShapes[1].m_Material, (int)(AtkPercentage));     // Normal Attack
+            AddValue(ListOfPieShapes[2].m_Material, (int)(CritAtkPercentage));     // Critical Attack
 
             Material tMaterial = null;
-
             foreach (Transform child in ParentObj.transform)
             {
-                //Debug.Log(child.localEulerAngles.z);
                 tMaterial = GetMaterial((int)child.localEulerAngles.z, ListOfPieShapes);
 
                 if (tMaterial != child.renderer.material)
@@ -126,6 +151,8 @@ public class PieController : MonoBehaviour
                     child.GetComponent<PieScript>().m_ePieType = HelperScript.GetTileType(child.renderer.material.name);
                 }
             }
+
+            m_iSpinNo++;
         }
 	}
 
@@ -139,6 +166,14 @@ public class PieController : MonoBehaviour
                 if (tPie.m_iValue > 0)
                 {
                     tPie.m_iValue += iAmt;
+                    if (tPie.m_iValue < 0)
+                    {
+                        tPie.m_iValue = 0;
+                    }
+                }
+                else
+                {
+                    tPie.m_iValue = 0;
                 }
             }
         }
@@ -154,7 +189,26 @@ public class PieController : MonoBehaviour
                 if (tPie.m_iValue > 0)
                 {
                     tPie.m_iValue -= iAmt;
+                    if (tPie.m_iValue < 0)
+                    {
+                        tPie.m_iValue = 0;
+                    }
                 }
+                else
+                {
+                    tPie.m_iValue = 0;
+                }
+            }
+        }
+    }
+
+    void SetValue(Material tMaterial, int iAmt)
+    {
+        foreach (Pie tPie in ListOfPieShapes)
+        {
+            if (tPie.m_Material == tMaterial)
+            {
+                tPie.m_iValue = iAmt;
             }
         }
     }
@@ -179,20 +233,70 @@ public class PieController : MonoBehaviour
 	public void StopRotate()
 	{
 		rotSpeed = 0;
+
+        ResetPerc();
 	}
 //==============================
 
-    public void Swiped()
+    void Swiped()
     {
-        AddValue(ListOfPieShapes[0].m_Material, 4);     // Miss Attack
-        SubValue(ListOfPieShapes[1].m_Material, 6);     // Normal Attack
-        AddValue(ListOfPieShapes[2].m_Material, 2);     // Critical Attack
+        float FailPercentage = (4.0f / 100.0f) * 360.0f;
+        float AtkPercentage = (6.0f / 100.0f) * 360.0f;
+        float CritAtkPercentage = (2.0f / 100.0f) * 360.0f;
+
+        // Odd No
+        if ((int)FailPercentage % 2 == 1)
+        {
+            FailPercentage -= 1;
+        }
+
+        if ((int)AtkPercentage % 2 == 1)
+        {
+            AtkPercentage -= 1;
+        }
+
+        if ((int)CritAtkPercentage % 2 == 1)
+        {
+            CritAtkPercentage -= 1;
+        }
+
+        //float FailPercentage = 4.0f;
+        //float AtkPercentage = 6.0f;
+        //float CritAtkPercentage = 2.0f;
+
+
+        AddValue(ListOfPieShapes[0].m_Material, (int)(FailPercentage));     // Miss Attack
+        SubValue(ListOfPieShapes[1].m_Material, (int)(AtkPercentage));     // Normal Attack
+        AddValue(ListOfPieShapes[2].m_Material, (int)(CritAtkPercentage));     // Critical Attack
 
         Material tMaterial = null;
-
         foreach (Transform child in ParentObj.transform)
         {
-            //Debug.Log(child.localEulerAngles.z);
+            tMaterial = GetMaterial((int)child.localEulerAngles.z, ListOfPieShapes);
+
+            if (tMaterial != child.renderer.material)
+            {
+                child.renderer.material = tMaterial;
+                child.GetComponent<PieScript>().m_ePieType = HelperScript.GetTileType(child.renderer.material.name);
+            }
+        }
+
+        m_iSpinNo++;
+    }
+
+    void ResetPerc()
+    {
+        float FailPercentage    =   (ListOfStartingPercentages[0] / 100.0f) * 360.0f;
+        float AtkPercentage     =   (ListOfStartingPercentages[1] / 100.0f) * 360.0f;
+        float CritAtkPercentage =   (ListOfStartingPercentages[2] / 100.0f) * 360.0f;
+        
+        SetValue(ListOfPieShapes[0].m_Material, (int)(FailPercentage));     // Miss Attack
+        SetValue(ListOfPieShapes[1].m_Material, (int)(AtkPercentage));      // Normal Attack
+        SetValue(ListOfPieShapes[2].m_Material, (int)(CritAtkPercentage));  // Critical Attack
+
+        Material tMaterial = null;
+        foreach (Transform child in ParentObj.transform)
+        {
             tMaterial = GetMaterial((int)child.localEulerAngles.z, ListOfPieShapes);
 
             if (tMaterial != child.renderer.material)
@@ -202,5 +306,4 @@ public class PieController : MonoBehaviour
             }
         }
     }
-
 }
