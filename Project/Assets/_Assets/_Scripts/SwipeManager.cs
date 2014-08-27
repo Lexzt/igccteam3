@@ -5,13 +5,15 @@ public class SwipeManager : MonoBehaviour
 {
 
 	/// 変数定義
-	public Vector2 	inputPosition;
-	public Vector2 	inputPositionBuffer;
 
-
+	public float 		accelSpeedRait = 1.0f;
+	public float		tapRangeDetection = 0.03f;
+	private Vector2 	inputPosition;
+	private Vector2 	inputPositionBuffer;
 	private PieController pCtrler;
-	private bool isClick = false;
+	private bool 	isClick = false;
 	private Vector2 objectPos;
+
 	void Start()
 	{
 		isClick = false;
@@ -25,12 +27,11 @@ public class SwipeManager : MonoBehaviour
 		{
 			onClickObject();
 		}
-		
 		if(Input.GetMouseButtonUp(0)){
 			onClickEnd();
 		}
-	}
 //=========================
+	}
 
 	void OnMouseDown()
 	{
@@ -51,7 +52,6 @@ public class SwipeManager : MonoBehaviour
 		//当たり判定
 		if (Physics.Raycast(clkRay, out rh, 500)){
 			selectGameObject = rh.collider.gameObject;// クリックされたゲームオブジェクトを格納.
-			print (selectGameObject);
 			if(selectGameObject.name == "Cylinder_1_Part(Clone)")
 			{
 				isClick = true;
@@ -85,17 +85,13 @@ public class SwipeManager : MonoBehaviour
 		if(subAngle < 0){
 			rotScale *= -1.0f;
 		}
-		print (angle1);
-		print (angle2);
-		print (objectPos);
 
-		print (rotScale);
-		if(Mathf.Abs(rotScale) < 0.03f)
+		if(Mathf.Abs(rotScale) < tapRangeDetection)
 		{
 			pCtrler.StopRotate();
 		}else{
-            rotScale *= 0.05f;
-            //rotScale *= Time.deltaTime;
+			rotScale *= 0.05f * accelSpeedRait;
+			//rotScale *= Time.deltaTime;
 			pCtrler.IncreaseSpeed (rotScale);
 		}
 		isClick = false;
