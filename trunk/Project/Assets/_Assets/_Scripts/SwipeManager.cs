@@ -11,12 +11,10 @@ public class SwipeManager : MonoBehaviour
 	/// private
 	private Vector2 		inputPositionStart;
 	private PieController 	pCtrler;
-	private bool 			isClick = false;
 	private Vector2 		objectPos;
 	private GameObject 		selectGameObject;// クリックされたゲームオブジェクトへの参照.
 	void Start()
 	{
-		isClick = false;
 		pCtrler = GetComponent<PieController>();
 	}
 	// Update is called once per frame
@@ -31,8 +29,9 @@ public class SwipeManager : MonoBehaviour
 	}
 
 	private void onClickObject(){
-
+		// temp firstPos
 		inputPositionStart = Input.mousePosition;
+
 		// レイを取得.
 		Ray clkRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit rh;
@@ -40,10 +39,6 @@ public class SwipeManager : MonoBehaviour
 		if (Physics.Raycast(clkRay, out rh, 500)){
 			selectGameObject = rh.collider.gameObject;// クリックされたゲームオブジェクトを格納.
 			objectPos = Camera.main.WorldToScreenPoint(pCtrler.gameObject.transform.position);
-//			if(selectGameObject.name == "Cylinder_1_Part(Clone)")
-//			{
-//				isClick = true;
-//			}
 		}
 		else{
 			selectGameObject = null;// 何もクリックされていない場合はnullを代入
@@ -53,8 +48,6 @@ public class SwipeManager : MonoBehaviour
 	 * @クリックされたときの処理
 	*/
 	private void onReleased () {
-
-		//if (!isClick) return;
 
 		Vector2 releasePosition = Input.mousePosition;
 		//Calc Swipe
@@ -67,9 +60,11 @@ public class SwipeManager : MonoBehaviour
 			if(Screen.width/2 > inputPositionStart.x){
 				// Swipe Up
 				if( subVec.y > 0)	pCtrler.IncreaseSpeed (accelSpeedValue);
+				else				pCtrler.IncreaseSpeed (-accelSpeedValue);
 			}else{
 				// Swipe Down
 				if( subVec.y < 0)	pCtrler.IncreaseSpeed (accelSpeedValue);
+				else				pCtrler.IncreaseSpeed (-accelSpeedValue);
 			}
 		}
 	}
