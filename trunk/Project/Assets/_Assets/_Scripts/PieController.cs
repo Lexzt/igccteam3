@@ -51,7 +51,7 @@ public class PieController : MonoBehaviour
 
     public int m_iLimit = 6;
 
-	void Start () 
+	void Awake () 
     {
         Init();
 	}

@@ -16,12 +16,11 @@ public class PlayerManager : MonoBehaviour {
     private PieController PieControl;
     private PieInternController PieInternControl;
 
-	void Start () 
+	void Awake () 
     {
-        PieControl = GameObject.Find("Pie Controller").GetComponent<PieController>();
-        PieInternControl = GameObject.Find("Pie Inner Circle").GetComponent<PieInternController>();
+        //PieInternControl = GameObject.Find("Pie Inner Circle").GetComponent<PieInternController>();
 
-        CurrentPlayerObj = ListOfPlayers[0];
+        //CurrentPlayerObj = ListOfPlayers[0];
 	}
 	
 	void Update () 
@@ -70,6 +69,7 @@ public class PlayerManager : MonoBehaviour {
     public void InitOnPerc()
     {
         // Change the Pie chart now
+        PieControl = GameObject.Find("Pie Controller").GetComponent<PieController>();
         float PercentageDifference = (PieControl.ListOfStartingPercentages[0] * ((float)CurrentPlayerObj.GetComponent<StatsScript>().m_iEvasion / 100.0f));
         float Difference = PieControl.ListOfStartingPercentages[0] - PercentageDifference;
 
