@@ -59,6 +59,7 @@
      <Compile Include="Assets\_Assets\_Scripts\Player.cs" />
      <Compile Include="Assets\_Assets\_Scripts\PlayerManager.cs" />
      <Compile Include="Assets\_Assets\_Scripts\Pointer.cs" />
+     <Compile Include="Assets\_Assets\_Scripts\StartScript.cs" />
      <Compile Include="Assets\_Assets\_Scripts\StatsScript.cs" />
      <Compile Include="Assets\_Assets\_Scripts\SwipeManager.cs" />
      <Compile Include="Assets\_Assets\_Scripts\TakumiTestScript\TestRotate.cs" />

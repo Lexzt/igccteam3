@@ -1,19 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
     // Start game as Player
     public eTurn m_eTurn = eTurn.ePLAYER;
 
+    // List Of object ot enable, on start
+    public List<GameObject> ListOfObjToEnable;
+
+    private EnemyManager EnemyManagerInstance;
+    private PlayerManager PlayerManagerInstance;
+    private bool EnableObjects = false;
+
 	void Start () 
     {
-	
+        EnemyManagerInstance = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
+        PlayerManagerInstance = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
 	}
 	
 	void Update () 
     {
-	
+        if (EnableObjects == false)
+        {
+            if (EnemyManagerInstance.m_bCurrentlyHasEnemy && PlayerManagerInstance.m_bCurrentlyHasPlayer)
+            {
+                foreach (GameObject Obj in ListOfObjToEnable)
+                {
+                    Obj.SetActive(true);
+                }
+
+                EnemyManagerInstance.InitOnPerc();
+                EnableObjects = true;
+            }
+        }
 	}
 
     public void SwapTurns()

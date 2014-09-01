@@ -18,8 +18,7 @@ public class EnemyManager : MonoBehaviour {
 
 	void Start () 
     {
-        PieControl = GameObject.Find("Pie Controller").GetComponent<PieController>();
-        PieInternControl = GameObject.Find("Pie Inner Circle").GetComponent<PieInternController>();
+        //PieInternControl = GameObject.Find("Pie Inner Circle").GetComponent<PieInternController>();
     }
 	
 	void Update () 
@@ -44,17 +43,6 @@ public class EnemyManager : MonoBehaviour {
 
                     // Currently have Enemy, So ignore
                     m_bCurrentlyHasEnemy = true;
-
-                    // Change the Pie chart now
-                    float PercentageDifference = (PieControl.ListOfStartingPercentages[0] * ((float)EnemyObj.GetComponent<StatsScript>().m_iEvasion / 100.0f));
-                    float Difference = PieControl.ListOfStartingPercentages[0] - PercentageDifference;
-
-                    List<float> PassableList = new List<float>();
-                    PassableList.Add(PercentageDifference);                                     // Miss
-                    PassableList.Add(PieControl.ListOfStartingPercentages[1] + Difference);     // Normal
-                    PassableList.Add(PieControl.ListOfStartingPercentages[2]);                  // Crit
-
-                    PieControl.Init(PassableList);
                 }
 
                 GUI.Label(new Rect((Screen.width / (ListOfEnemyies.Count + 1)) * (i + 1) - 35, 110, 100, 50), "Health: " + ListOfEnemyies[i].GetComponent<StatsScript>().m_fHealth.ToString());
@@ -84,6 +72,8 @@ public class EnemyManager : MonoBehaviour {
 
     public void InitOnPerc()
     {
+        PieControl = GameObject.Find("Pie Controller").GetComponent<PieController>();
+
         // Change the Pie chart now
         float PercentageDifference = (PieControl.ListOfStartingPercentages[0] * ((float)CurrentEnemyObj.GetComponent<StatsScript>().m_iEvasion / 100.0f));
         float Difference = PieControl.ListOfStartingPercentages[0] - PercentageDifference;
