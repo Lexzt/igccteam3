@@ -48,11 +48,16 @@
   <ItemGroup>
      <Compile Include="Assets\_Assets\_Scripts\Enemy.cs" />
      <Compile Include="Assets\_Assets\_Scripts\EnemyManager.cs" />
+     <Compile Include="Assets\_Assets\_Scripts\GUIFade.cs" />
+     <Compile Include="Assets\_Assets\_Scripts\GameManager.cs" />
      <Compile Include="Assets\_Assets\_Scripts\HalfScript.cs" />
      <Compile Include="Assets\_Assets\_Scripts\HelperScript.cs" />
      <Compile Include="Assets\_Assets\_Scripts\PieController.cs" />
+     <Compile Include="Assets\_Assets\_Scripts\PieInternController.cs" />
+     <Compile Include="Assets\_Assets\_Scripts\PieInternScript.cs" />
      <Compile Include="Assets\_Assets\_Scripts\PieScript.cs" />
      <Compile Include="Assets\_Assets\_Scripts\Player.cs" />
+     <Compile Include="Assets\_Assets\_Scripts\PlayerManager.cs" />
      <Compile Include="Assets\_Assets\_Scripts\Pointer.cs" />
      <Compile Include="Assets\_Assets\_Scripts\StatsScript.cs" />
      <Compile Include="Assets\_Assets\_Scripts\SwipeManager.cs" />

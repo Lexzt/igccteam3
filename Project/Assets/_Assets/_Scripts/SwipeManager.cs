@@ -12,6 +12,7 @@ public class SwipeManager : MonoBehaviour
 	private Vector2 	inputPosition;
 	private Vector2 	inputPositionBuffer;
 	private PieController pCtrler;
+    private PieInternController pInternCtrler;
 	private bool 	isClick = false;
 	private Vector2 objectPos;
 
@@ -27,6 +28,7 @@ public class SwipeManager : MonoBehaviour
 	{
 		isClick = false;
 		pCtrler = GetComponent<PieController>();
+        pInternCtrler = GameObject.Find("Pie Inner Circle").GetComponent<PieInternController>();
         Point = GameObject.Find("Pointer").GetComponent<Pointer>();
 	}
 	// Update is called once per frame
@@ -62,14 +64,15 @@ public class SwipeManager : MonoBehaviour
 
             if (m_bStopRotate == true)
             {
-                if (GameObject.Find("EnemyManager").GetComponent<EnemyManager>().m_bCurrentlyHasEnemy)
+                if (GameObject.Find("EnemyManager").GetComponent<EnemyManager>().m_bCurrentlyHasEnemy &&
+                    GameObject.Find("PlayerManager").GetComponent<PlayerManager>().m_bCurrentlyHasPlayer)
                 {
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                     if (Physics.Raycast(ray, 100) == false)
                     {
                         pCtrler.StopRotate();
                         Point.CheckRay();
-                        GameObject.Find("Transition").GetComponent<TransitionScript>().m_bTriggerAnimation = true;
+                        pInternCtrler.m_bStopRotation = true;
                     }
                 }
             }
@@ -78,6 +81,7 @@ public class SwipeManager : MonoBehaviour
                 if (pCtrler.m_iSpinNo < pCtrler.m_iLimit)
                 {
                     pCtrler.IncreaseSpeed(accelSpeedValue);
+                    pInternCtrler.rotSpeed += accelSpeedValue;
                 }
             }
             m_bStopRotate = false;
