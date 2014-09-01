@@ -10,6 +10,15 @@ public enum ePIETYPE
     eCRITATTACK,
 }
 
+public enum eBONUSPIETYPE
+{
+    eNONE = -1,
+    eNORMALATK,
+    eDOUBLEATK,
+    eSECONDSPIN,
+    eSTUN,
+}
+
 public enum eDirection
 {
     eNONE = -1,
@@ -18,6 +27,13 @@ public enum eDirection
     eUP,
     eDOWN,
 };
+
+public enum eTurn
+{
+    eNONE = -1,
+    ePLAYER,
+    eENEMY,
+}
 
 public class HelperScript : MonoBehaviour 
 {
@@ -121,5 +137,12 @@ public class HelperScript : MonoBehaviour
         Obj.GetComponent<HalfScript>().m_bStartWait = true;
         yield return new WaitForSeconds(tTime);
         Obj.GetComponent<HalfScript>().m_bWait = true;
+    }
+
+    public static IEnumerator WaitIntern(GameObject Obj, float tTime)
+    {
+        Obj.GetComponent<PieInternController>().m_bStartWait = true;
+        yield return new WaitForSeconds(tTime);
+        Obj.GetComponent<PieInternController>().m_bWait = true;
     }
 }

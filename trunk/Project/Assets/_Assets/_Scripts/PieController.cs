@@ -382,6 +382,12 @@ public class PieController : MonoBehaviour
             }
         }
 
+        m_iSpinNo = 0;
+        foreach (Transform child in BarParentObj.transform)
+        {
+            child.renderer.material.color = Color.white;
+        }
+
         // StartGame;
         StartRoulette(1);
     }

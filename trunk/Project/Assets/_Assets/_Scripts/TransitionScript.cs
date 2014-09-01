@@ -49,7 +49,18 @@ public class TransitionScript : MonoBehaviour {
                         {
                             if (child.GetComponent<HalfScript>().m_bEezing == false)
                             {
-                                GameObject.Find("Pie Controller").GetComponent<PieController>().ResetPercByEnemy();
+                                //GameObject.Find("Pie Controller").GetComponent<PieController>().ResetPercByEnemy();
+                                //GameObject.Find("GameManager").GetComponent<GameManager>().SwapTurns();
+
+                                if (GameObject.Find("GameManager").GetComponent<GameManager>().m_eTurn == eTurn.ePLAYER)
+                                {
+                                    GameObject.Find("EnemyManager").GetComponent<EnemyManager>().InitOnPerc();
+                                }
+                                else if (GameObject.Find("GameManager").GetComponent<GameManager>().m_eTurn == eTurn.eENEMY)
+                                {
+                                    GameObject.Find("PlayerManager").GetComponent<PlayerManager>().InitOnPerc();
+                                }
+                                GameObject.Find("Pie Inner Circle").GetComponent<PieInternController>().ResetValues();
 
                                 child.GetComponent<HalfScript>().MoveToOrigin();
                                 m_bIsInside = false;
@@ -60,7 +71,6 @@ public class TransitionScript : MonoBehaviour {
                             }
                         }
                     }
-                    
                 }
             }
         }

@@ -14,21 +14,17 @@ public class EnemyManager : MonoBehaviour {
 
     // Pie Controller Object
     private PieController PieControl;
+    private PieInternController PieInternControl;
 
 	void Start () 
     {
         PieControl = GameObject.Find("Pie Controller").GetComponent<PieController>();
-	}
+        PieInternControl = GameObject.Find("Pie Inner Circle").GetComponent<PieInternController>();
+    }
 	
 	void Update () 
     {
-        //if (CurrentEnemyObj != null)
-        //{
-        //    if (CurrentEnemyObj.GetComponent<StatsScript>().m_fHealth <= 0)
-        //    {
-        //        ResetManager();
-        //    }
-        //}
+
 	}
 
     void OnGUI()
@@ -60,11 +56,15 @@ public class EnemyManager : MonoBehaviour {
 
                     PieControl.Init(PassableList);
                 }
+
+                GUI.Label(new Rect((Screen.width / (ListOfEnemyies.Count + 1)) * (i + 1) - 35, 110, 100, 50), "Health: " + ListOfEnemyies[i].GetComponent<StatsScript>().m_fHealth.ToString());
+                GUI.Label(new Rect((Screen.width / (ListOfEnemyies.Count + 1)) * (i + 1) - 35, 130, 100, 50), "Attack: " + ListOfEnemyies[i].GetComponent<StatsScript>().m_fAttack.ToString());
+                GUI.Label(new Rect((Screen.width / (ListOfEnemyies.Count + 1)) * (i + 1) - 35, 150, 100, 50), "Evasion: " + ListOfEnemyies[i].GetComponent<StatsScript>().m_iEvasion.ToString());
             }
         }
         else
         {
-            GUI.Label(new Rect((Screen.width / 2) - 50, 50, 100, 50), CurrentEnemyObj.name);
+            GUI.Label(new Rect((Screen.width / 2) - 100, 50, 200, 50), "Current Enemy: " + CurrentEnemyObj.name);
         }
     }
 
@@ -80,5 +80,19 @@ public class EnemyManager : MonoBehaviour {
     {
         m_bCurrentlyHasEnemy = false;
         CurrentEnemyObj = null;
+    }
+
+    public void InitOnPerc()
+    {
+        // Change the Pie chart now
+        float PercentageDifference = (PieControl.ListOfStartingPercentages[0] * ((float)CurrentEnemyObj.GetComponent<StatsScript>().m_iEvasion / 100.0f));
+        float Difference = PieControl.ListOfStartingPercentages[0] - PercentageDifference;
+
+        List<float> PassableList = new List<float>();
+        PassableList.Add(PercentageDifference);                                     // Miss
+        PassableList.Add(PieControl.ListOfStartingPercentages[1] + Difference);     // Normal
+        PassableList.Add(PieControl.ListOfStartingPercentages[2]);                  // Crit
+
+        PieControl.Init(PassableList);
     }
 }
