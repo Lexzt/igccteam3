@@ -46,9 +46,11 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\_Assets\_Scripts\AudioScript.cs" />
      <Compile Include="Assets\_Assets\_Scripts\Enemy.cs" />
      <Compile Include="Assets\_Assets\_Scripts\EnemyManager.cs" />
      <Compile Include="Assets\_Assets\_Scripts\GUIFade.cs" />
+     <Compile Include="Assets\_Assets\_Scripts\GUIScript.cs" />
      <Compile Include="Assets\_Assets\_Scripts\GameManager.cs" />
      <Compile Include="Assets\_Assets\_Scripts\HalfScript.cs" />
      <Compile Include="Assets\_Assets\_Scripts\HelperScript.cs" />
@@ -64,6 +66,7 @@
      <Compile Include="Assets\_Assets\_Scripts\SwipeManager.cs" />
      <Compile Include="Assets\_Assets\_Scripts\TakumiTestScript\TestRotate.cs" />
      <Compile Include="Assets\_Assets\_Scripts\TransitionScript.cs" />
+     <Compile Include="Assets\_Assets\_Scripts\UnitySingleton.cs" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />

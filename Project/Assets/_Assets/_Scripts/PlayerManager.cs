@@ -49,13 +49,13 @@ public class PlayerManager : MonoBehaviour {
 
                 GUI.Label(new Rect((Screen.width / (ListOfPlayers.Count + 1)) * (i + 1) - 35, 460, 100, 50), "Health: " + ListOfPlayers[i].GetComponent<StatsScript>().m_fHealth.ToString());
                 GUI.Label(new Rect((Screen.width / (ListOfPlayers.Count + 1)) * (i + 1) - 35, 480, 100, 50), "Attack: " + ListOfPlayers[i].GetComponent<StatsScript>().m_fAttack.ToString());
-                GUI.Label(new Rect((Screen.width / (ListOfPlayers.Count + 1)) * (i + 1) - 35, 500, 100, 50), "Evasion: " + ListOfPlayers[i].GetComponent<StatsScript>().m_iEvasion.ToString());
+                GUI.Label(new Rect((Screen.width / (ListOfPlayers.Count + 1)) * (i + 1) - 35, 500, 100, 50), "Agility: " + ListOfPlayers[i].GetComponent<StatsScript>().m_iEvasion.ToString());
             }
         }
-        else
-        {
-            GUI.Label(new Rect((Screen.width / 2) - 100, 65, 200, 50), "Current Player: " + CurrentPlayerObj.name);
-        }
+        //else
+        //{
+        //    GUI.Label(new Rect((Screen.width / 2) - 100, 65, 200, 50), "Current Player: " + CurrentPlayerObj.name);
+        //}
     }
 
     public void DecreaseHealth(int tDamage)

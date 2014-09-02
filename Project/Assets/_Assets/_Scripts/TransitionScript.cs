@@ -75,4 +75,16 @@ public class TransitionScript : MonoBehaviour {
             }
         }
 	}
+
+    public void GameEnd()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.GetComponent<HalfScript>().m_bEezing == false)
+            {
+                child.GetComponent<HalfScript>().MoveToCenter();
+                m_bIsInside = true;
+            }
+        }
+    }
 }

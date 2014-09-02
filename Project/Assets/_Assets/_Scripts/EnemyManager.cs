@@ -47,13 +47,13 @@ public class EnemyManager : MonoBehaviour {
 
                 GUI.Label(new Rect((Screen.width / (ListOfEnemyies.Count + 1)) * (i + 1) - 35, 110, 100, 50), "Health: " + ListOfEnemyies[i].GetComponent<StatsScript>().m_fHealth.ToString());
                 GUI.Label(new Rect((Screen.width / (ListOfEnemyies.Count + 1)) * (i + 1) - 35, 130, 100, 50), "Attack: " + ListOfEnemyies[i].GetComponent<StatsScript>().m_fAttack.ToString());
-                GUI.Label(new Rect((Screen.width / (ListOfEnemyies.Count + 1)) * (i + 1) - 35, 150, 100, 50), "Evasion: " + ListOfEnemyies[i].GetComponent<StatsScript>().m_iEvasion.ToString());
+                GUI.Label(new Rect((Screen.width / (ListOfEnemyies.Count + 1)) * (i + 1) - 35, 150, 100, 50), "Agility: " + ListOfEnemyies[i].GetComponent<StatsScript>().m_iEvasion.ToString());
             }
         }
-        else
-        {
-            GUI.Label(new Rect((Screen.width / 2) - 100, 50, 200, 50), "Current Enemy: " + CurrentEnemyObj.name);
-        }
+        //else
+        //{
+        //    GUI.Label(new Rect((Screen.width / 2) - 100, 50, 200, 50), "Current Enemy: " + CurrentEnemyObj.name);
+        //}
     }
 
     public void DecreaseHealth(int tDamage)

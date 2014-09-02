@@ -68,12 +68,14 @@ public class Pointer : MonoBehaviour {
                 else if (hit.transform.GetComponent<PieScript>().m_ePieType == ePIETYPE.eCRITATTACK)
                 {
                     m_iCurrentDamage += (m_iBaseDamage + PieControl.m_iSpinNo * m_iConstantIncrement);
+                    m_iCurrentDamage *= 2;
                 }
                 else if (hit.transform.GetComponent<PieScript>().m_ePieType == ePIETYPE.eFAIL)
                 {
                     m_iCurrentDamage = 0;
                 }
 
+                //GUIFeedback.GetComponent<GUIScript>().Text = m_iCurrentDamage.ToString();
                 GUIFeedback.GetComponent<GUIText>().text = m_iCurrentDamage.ToString();
                 GUIFeedback.GetComponent<GUIFade>().ResetAlpha();
             }
@@ -94,11 +96,13 @@ public class Pointer : MonoBehaviour {
                     else if (hit.transform.GetComponent<PieScript>().m_ePieType == ePIETYPE.eCRITATTACK)
                     {
                         m_iCurrentDamage += m_iBaseDamage + PieControl.m_iSpinNo * m_iConstantIncrement;
+                        m_iCurrentDamage *= 2;
                     }
                     else if (hit.transform.GetComponent<PieScript>().m_ePieType == ePIETYPE.eFAIL)
                     {
                         m_iCurrentDamage = 0;
                     }
+                    //GUIFeedback.GetComponent<GUIScript>().Text = m_iCurrentDamage.ToString();
                     GUIFeedback.GetComponent<GUIText>().text = m_iCurrentDamage.ToString();
                     GUIFeedback.GetComponent<GUIFade>().ResetAlpha();
                 }
@@ -118,22 +122,23 @@ public class Pointer : MonoBehaviour {
         {
             if (hit.transform.tag == "PieIntern")
             {
-                Debug.Log(hit.transform.GetComponent<PieInternScript>().m_ePieType);
+                //Debug.Log(hit.transform.GetComponent<PieInternScript>().m_ePieType);
 
                 if (hit.transform.GetComponent<PieInternScript>().m_ePieType == eBONUSPIETYPE.eNORMALATK)
                 {
                     if (GameManagerInstance.m_eTurn == eTurn.ePLAYER)
                     {
-                        Debug.Log("Deal " + m_iCurrentDamage + " Dmg to enemy");
+                        //Debug.Log("Deal " + m_iCurrentDamage + " Dmg to enemy");
                         EnemyManagerInstance.DecreaseHealth(m_iCurrentDamage);
                         GameManagerInstance.m_eTurn = eTurn.eENEMY;
                     }
                     else if (GameManagerInstance.m_eTurn == eTurn.eENEMY)
                     {
-                        Debug.Log("Deal " + m_iCurrentDamage + " Dmg to player");
+                        //Debug.Log("Deal " + m_iCurrentDamage + " Dmg to player");
                         PlayerManagerInstance.DecreaseHealth(m_iCurrentDamage);
                         GameManagerInstance.m_eTurn = eTurn.ePLAYER;
                     }
+                    //GUIFeedback.GetComponent<GUIScript>().Text = m_iCurrentDamage.ToString();
                     GUIFeedback.GetComponent<GUIText>().text = m_iCurrentDamage.ToString();
                     GUIFeedback.GetComponent<GUIFade>().ResetAlpha();
                     m_iCurrentDamage = 0;
@@ -143,16 +148,17 @@ public class Pointer : MonoBehaviour {
                     m_iCurrentDamage *= 2;
                     if (GameManagerInstance.m_eTurn == eTurn.ePLAYER)
                     {
-                        Debug.Log("Deal " + m_iCurrentDamage + " Dmg to enemy");
+                        //Debug.Log("Deal " + m_iCurrentDamage + " Dmg to enemy");
                         EnemyManagerInstance.DecreaseHealth(m_iCurrentDamage);
                         GameManagerInstance.m_eTurn = eTurn.eENEMY;
                     }
                     else if (GameManagerInstance.m_eTurn == eTurn.eENEMY)
                     {
-                        Debug.Log("Deal " + m_iCurrentDamage + " Dmg to player");
+                        //Debug.Log("Deal " + m_iCurrentDamage + " Dmg to player");
                         PlayerManagerInstance.DecreaseHealth(m_iCurrentDamage);
                         GameManagerInstance.m_eTurn = eTurn.ePLAYER;
                     }
+                    //GUIFeedback.GetComponent<GUIScript>().Text = m_iCurrentDamage.ToString();
                     GUIFeedback.GetComponent<GUIText>().text = m_iCurrentDamage.ToString();
                     GUIFeedback.GetComponent<GUIFade>().ResetAlpha();
                     m_iCurrentDamage = 0;
@@ -191,6 +197,7 @@ public class Pointer : MonoBehaviour {
                             PlayerManagerInstance.DecreaseHealth(m_iCurrentDamage);
                             GameManagerInstance.m_eTurn = eTurn.ePLAYER;
                         }
+                        //GUIFeedback.GetComponent<GUIScript>().Text = m_iCurrentDamage.ToString();
                         GUIFeedback.GetComponent<GUIText>().text = m_iCurrentDamage.ToString();
                         GUIFeedback.GetComponent<GUIFade>().ResetAlpha();
                         m_iCurrentDamage = 0;
@@ -210,6 +217,7 @@ public class Pointer : MonoBehaviour {
                             PlayerManagerInstance.DecreaseHealth(m_iCurrentDamage);
                             GameManagerInstance.m_eTurn = eTurn.ePLAYER;
                         }
+                        //GUIFeedback.GetComponent<GUIScript>().Text = m_iCurrentDamage.ToString();
                         GUIFeedback.GetComponent<GUIText>().text = m_iCurrentDamage.ToString();
                         GUIFeedback.GetComponent<GUIFade>().ResetAlpha();
                         m_iCurrentDamage = 0;
