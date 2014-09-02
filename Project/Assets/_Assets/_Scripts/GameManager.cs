@@ -18,11 +18,15 @@ public class GameManager : MonoBehaviour {
     private bool m_bGameEnd = false;
     private TransitionScript TransitionInstance;
 
+    public List<Texture> Icons;
+    private GUITexture PlayerTurnIcon;
+
 	void Start () 
     {
         EnemyManagerInstance = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
         PlayerManagerInstance = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         GameEnd = GameObject.Find("GameEnd").GetComponent<GUIText>();
+        PlayerTurnIcon = transform.FindChild("PlayerTurnIcon").GetComponent<GUITexture>();
 	}
 	
 	void Update () 
@@ -63,6 +67,15 @@ public class GameManager : MonoBehaviour {
                 TransitionInstance.GameEnd();
             }
         }
+
+        if (m_eTurn == eTurn.ePLAYER)
+        {
+            PlayerTurnIcon.texture = Icons[0];
+        }
+        else
+        {
+            PlayerTurnIcon.texture = Icons[1];
+        }
 	}
 
     public void SwapTurns()
@@ -72,12 +85,10 @@ public class GameManager : MonoBehaviour {
         if (m_eTurn == eTurn.ePLAYER)
         {
             m_eTurn = eTurn.eENEMY;
-            //GameObject.Find("PlayerManager").GetComponent<PlayerManager>().InitOnPerc();
         }
         else if (m_eTurn == eTurn.eENEMY)
         {
             m_eTurn = eTurn.ePLAYER;
-            //GameObject.Find("EnemyManager").GetComponent<EnemyManager>().InitOnPerc();
         }
     }
 
@@ -85,11 +96,11 @@ public class GameManager : MonoBehaviour {
     {
         if (m_eTurn == eTurn.eENEMY)
         {
-            GUI.Label(new Rect(Screen.width / 2 - 75, 25, 150, 50), "Current Turn: Enemy");
+            GUI.Label(new Rect(Screen.width / 2 - 55, 75, 150, 50), "Current Turn: Enemy");
         }
         else
         {
-            GUI.Label(new Rect(Screen.width / 2 - 75, 25, 150, 50), "Current Turn: Player");
+            GUI.Label(new Rect(Screen.width / 2 - 55, 75, 150, 50), "Current Turn: Player");
         }
 
         if (m_bGameEnd)

@@ -16,11 +16,14 @@ public class PlayerManager : MonoBehaviour {
     private PieController PieControl;
     private PieInternController PieInternControl;
 
+    public List<Texture> ListOfButtonTexture;
+    public GUISkin skin;
+    public GUISkin statsskin;
+    private GUIStyle Style;
+
 	void Awake () 
     {
-        //PieInternControl = GameObject.Find("Pie Inner Circle").GetComponent<PieInternController>();
-
-        //CurrentPlayerObj = ListOfPlayers[0];
+        Style = new GUIStyle();
 	}
 	
 	void Update () 
@@ -30,11 +33,12 @@ public class PlayerManager : MonoBehaviour {
 
     void OnGUI()
     {
+        GUI.skin = skin;
         if (m_bCurrentlyHasPlayer == false)
         {
             for (int i = 0; i < ListOfPlayers.Count; i++)
             {
-                if (GUI.Button(new Rect((Screen.width / (ListOfPlayers.Count + 1)) * (i + 1) - 50, 400, 100, 50), ListOfPlayers[i].name))
+                if (GUI.Button(new Rect((Screen.width / (ListOfPlayers.Count + 1)) * (i + 1) - 64, 300, 128, 128), ListOfButtonTexture[i], Style))
                 {
                     // Create Enemy Object
                     GameObject PlayerObj = Instantiate(ListOfPlayers[i], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
@@ -45,11 +49,13 @@ public class PlayerManager : MonoBehaviour {
 
                     // Currently have Enemy, So ignore
                     m_bCurrentlyHasPlayer = true;
+
+                    PlayerObj.GetComponent<Player>().skin = statsskin;
                 }
 
-                GUI.Label(new Rect((Screen.width / (ListOfPlayers.Count + 1)) * (i + 1) - 35, 460, 100, 50), "Health: " + ListOfPlayers[i].GetComponent<StatsScript>().m_fHealth.ToString());
-                GUI.Label(new Rect((Screen.width / (ListOfPlayers.Count + 1)) * (i + 1) - 35, 480, 100, 50), "Attack: " + ListOfPlayers[i].GetComponent<StatsScript>().m_fAttack.ToString());
-                GUI.Label(new Rect((Screen.width / (ListOfPlayers.Count + 1)) * (i + 1) - 35, 500, 100, 50), "Agility: " + ListOfPlayers[i].GetComponent<StatsScript>().m_iEvasion.ToString());
+                GUI.Label(new Rect((Screen.width / (ListOfPlayers.Count + 1)) * (i + 1) - 35, 410, 150, 50), "Health: " + ListOfPlayers[i].GetComponent<StatsScript>().m_fHealth.ToString());
+                GUI.Label(new Rect((Screen.width / (ListOfPlayers.Count + 1)) * (i + 1) - 35, 430, 150, 50), "Attack: " + ListOfPlayers[i].GetComponent<StatsScript>().m_fAttack.ToString());
+                GUI.Label(new Rect((Screen.width / (ListOfPlayers.Count + 1)) * (i + 1) - 35, 450, 150, 50), "Agility: " + ListOfPlayers[i].GetComponent<StatsScript>().m_iEvasion.ToString());
             }
         }
         //else
