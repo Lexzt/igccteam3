@@ -51,9 +51,13 @@ public class PieController : MonoBehaviour
 
     public int m_iLimit = 6;
 
+    // Game Manager Instance
+    private GameManager GameManagerInstance;
+
 	void Awake () 
     {
         Init();
+        GameManagerInstance = GameObject.Find("GameManager").GetComponent<GameManager>();
 	}
 
     void Update() 
@@ -93,7 +97,14 @@ public class PieController : MonoBehaviour
                 }
             }
 
-            BarParentObj.transform.GetChild((m_iLimit - 1) - m_iSpinNo++).renderer.material.color = Color.blue;
+            if (GameManagerInstance.m_eTurn == eTurn.ePLAYER)
+            {
+                BarParentObj.transform.GetChild((m_iLimit - 1) - m_iSpinNo++).FindChild("Bar").renderer.material.color = Color.cyan;
+            }
+            else if (GameManagerInstance.m_eTurn == eTurn.eENEMY)
+            {
+                BarParentObj.transform.GetChild((m_iLimit - 1) - m_iSpinNo++).FindChild("Bar").renderer.material.color = new Color(1.0f, 0.1f, 0.1f);
+            }
         }
 
         if(Input.GetKey(KeyCode.N))
@@ -226,7 +237,15 @@ public class PieController : MonoBehaviour
                     }
                 }
             }
-            BarParentObj.transform.GetChild((m_iLimit - 1) - m_iSpinNo++).renderer.material.color = Color.blue;
+
+            if (GameManagerInstance.m_eTurn == eTurn.ePLAYER)
+            {
+                BarParentObj.transform.GetChild((m_iLimit - 1) - m_iSpinNo++).FindChild("Bar").renderer.material.color = Color.cyan;
+            }
+            else if (GameManagerInstance.m_eTurn == eTurn.eENEMY)
+            {
+                BarParentObj.transform.GetChild((m_iLimit - 1) - m_iSpinNo++).FindChild("Bar").renderer.material.color = new Color(1.0f, 0.35f, 0.35f);
+            }
         }
     }
 
@@ -256,7 +275,8 @@ public class PieController : MonoBehaviour
         m_iSpinNo = 0;
         foreach (Transform child in BarParentObj.transform)
         {
-            child.renderer.material.color = Color.white;
+            child.FindChild("Bar").renderer.material.color = Color.white;
+            //child.renderer.material.color = Color.white;
         }
 
         StartRoulette(1);
@@ -294,7 +314,8 @@ public class PieController : MonoBehaviour
         m_iSpinNo = 0;
         foreach (Transform child in BarParentObj.transform)
         {
-            child.renderer.material.color = Color.white;
+            child.FindChild("Bar").renderer.material.color = Color.white;
+            //child.renderer.material.color = Color.white;
         }
 
         StartRoulette(1);
@@ -385,7 +406,8 @@ public class PieController : MonoBehaviour
         m_iSpinNo = 0;
         foreach (Transform child in BarParentObj.transform)
         {
-            child.renderer.material.color = Color.white;
+            child.FindChild("Bar").renderer.material.color = Color.white;
+            //child.renderer.material.color = Color.white;
         }
 
         // StartGame;
