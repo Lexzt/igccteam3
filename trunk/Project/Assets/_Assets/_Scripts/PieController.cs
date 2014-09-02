@@ -363,7 +363,7 @@ public class PieController : MonoBehaviour
         for (int i = 0; i < m_iLimit; i++)
         {
             GameObject Inst = Instantiate(BarObject, new Vector3(0, 0, BarObject.transform.position.z), Quaternion.identity) as GameObject;
-            Inst.transform.Rotate(new Vector3(0, 0, (int)(i * (360 / m_iLimit))));
+            Inst.transform.Rotate(new Vector3(0, 0, (int)(i * (360 / m_iLimit)) + 60));
             Inst.transform.parent = BarParentObj.transform;
         }
 
