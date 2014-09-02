@@ -62,7 +62,7 @@ public class PieInternController : MonoBehaviour {
 
     public void ResetValues()
     {
-        Debug.Log("Reset Intern Control");
+        //Debug.Log("Reset Intern Control");
         rotSpeed = 1;
         m_bTriggerEffect = false;
         m_bWait = false;

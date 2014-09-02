@@ -14,58 +14,7 @@ Platform assembly: C:\Users\user\Desktop\IGCC Team 3\Project\FirstPrototype_Data
 Loading C:\Users\user\Desktop\IGCC Team 3\Project\FirstPrototype_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: C:\Users\user\Desktop\IGCC Team 3\Project\FirstPrototype_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
 Loading C:\Users\user\Desktop\IGCC Team 3\Project\FirstPrototype_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
-- Completed reload, in  0.053 seconds
+- Completed reload, in  0.055 seconds
 desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-UnloadTime: 0.278033 ms
-Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 264.
-Total: 0.609248 ms (FindLiveObjects: 0.019592 ms CreateObjectMapping: 0.011195 ms MarkObjects: 0.085369 ms  DeleteObjects: 0.003265 ms)
-
-Platform assembly: C:\Users\user\Desktop\IGCC Team 3\Project\FirstPrototype_Data\Managed\System.dll (this message is harmless)
-eNORMALATK
- 
-(Filename: C:/BuildAgent/work/aeedb04a1292f85a/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Deal 22 Dmg to enemy
- 
-(Filename: C:/BuildAgent/work/aeedb04a1292f85a/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Reset Intern Control
- 
-(Filename: C:/BuildAgent/work/aeedb04a1292f85a/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Reset Intern Control
- 
-(Filename: C:/BuildAgent/work/aeedb04a1292f85a/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-eSECONDSPIN
- 
-(Filename: C:/BuildAgent/work/aeedb04a1292f85a/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Reset Intern Control
- 
-(Filename: C:/BuildAgent/work/aeedb04a1292f85a/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Reset Intern Control
- 
-(Filename: C:/BuildAgent/work/aeedb04a1292f85a/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-eNORMALATK
- 
-(Filename: C:/BuildAgent/work/aeedb04a1292f85a/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Deal 44 Dmg to player
- 
-(Filename: C:/BuildAgent/work/aeedb04a1292f85a/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Reset Intern Control
- 
-(Filename: C:/BuildAgent/work/aeedb04a1292f85a/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Reset Intern Control
- 
-(Filename: C:/BuildAgent/work/aeedb04a1292f85a/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
